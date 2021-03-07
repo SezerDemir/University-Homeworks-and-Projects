@@ -1,6 +1,0 @@
-class HW3
-!!!130040.java!!!	main(inout args : String [[]]) : void
-		IslandFinder island = new IslandFinder();
-		Calculater calc = new Calculater();
-		island.findIslandCount();
-		calc.toPostfix();
