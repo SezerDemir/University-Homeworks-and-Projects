@@ -1,0 +1,8 @@
+class Coor
+!!!130936.java!!!	Coor(in i : int, in j : int)
+			this.i = i;
+			this.j = j;
+!!!131064.java!!!	getI() : int
+			return i;
+!!!131192.java!!!	getJ() : int
+			return j;

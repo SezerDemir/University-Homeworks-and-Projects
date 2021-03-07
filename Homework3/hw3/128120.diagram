@@ -1,0 +1,20 @@
+format 221
+
+classcanvas 128120 class_ref 128760 // IslandStack
+  classdiagramsettings member_max_width 0 end
+  xyz 342 287 2000
+end
+classcanvas 128504 class_ref 128504 // HW3
+  classdiagramsettings member_max_width 0 end
+  xyz 354 211 2000
+end
+classcanvas 129656 class_ref 128632 // IslandFinder
+  classdiagramsettings member_max_width 0 end
+  xyz 497 240 2000
+end
+relationcanvas 129784 relation_ref 128888 // <generalisation>
+  from ref 128120 z 2001 to ref 129656
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end
