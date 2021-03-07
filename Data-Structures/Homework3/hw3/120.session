@@ -1,0 +1,12 @@
+window_sizes 1800 910 450 1345 758 104
+
+diagrams
+  active  classdiagram_ref 128120 // diagrma
+    1076 606 100 A4 0 0
+end
+show_stereotypes
+selected class_ref 128632 // IslandFinder
+open
+  classview_ref 128120 // hw3
+end
+end
