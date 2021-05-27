@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\setlist{leftmargin=5.5mm}
+\usepackage{graphicx}
+\usepackage{grffile} 
+\usepackage{hyperref}
+\usepackage{lipsum} 
+\graphicspath{ {./images/} }
+\title{HW4}
+\author{Sezer Demir }
+
+\begin{document}
+
+\maketitle
+\section{Requirements}
+
+\setlength{\parindent}{8ex}
+\hspace{\parindent} For this homework I achieved all the requirements those are mentioned in homework.\par
+\section{Design Decisions}
+
+\begin{enumerate}[label=\alph*.), leftmargin=1.5\parindent]
+  \item All arguments those are passed to program are checked. Arguments must be formed in following rules. Otherwise an error message will be displayed and program ends immediately. 
+    \begin{enumerate}[label=\arabic*.), leftmargin=1.5\parindent]
+        \item First argument is first file's name. If file is not exist program will be terminated immediately.
+        \item Second argument is second file's name. If file is not exist program will be terminated immediately.
+        \item Third argument is total amount of money that student will have. It cannot be equal or less than 0 and it cannot include letters in it. Otherwise an error message will be displayed and program will be terminated immediately.
+        \item You must enter exactly 3 arguments. More or less argument will not work too. Otherwise an error message will be displayed and program will be terminated immediately.
+    \end{enumerate}
+  \item I didn't check second input file's content is proper or not. It must be formed like in homework's pdf. For example, each line must be written like "odtulu 5 3 900". So delimiter must be " " and there will not be a missing information. Like odtulu missing and line consist of "5 3 900".
+  \item If second input file have not any student info, means empty file, message of "There is no student in the input file, so no homework is solved" will be printed.
+  \item Program just reads 'S', 'Q', and 'C' characters from first input file. So priorities must be written in uppercase like in homework pdf. Otherwise it will skip them.
+  
+\end{enumerate}
+
+\section{How It Works}
+\par\hspace{\parindent} I used a structure named "Students" to store each of hired-student's information. Their Q S C values and unnamed semiphore object. Also I created 3 different arrays. Each array stores hired-student indices according to their best aspect. Lets say we have 3 hired-students and their Q values are 2, 5, and 1. So the array that have indices of hired-students according to their Q values will be like that: [1,0,2] since second one have best Q value, first one second and third one last. So when main thread want to check best hired-student that has highest Q value, then it will check that the student is available at the moment (not solving any homework) by looking at array's first element. That element, which is '1', indicates index of the student so it's second thread that have best Q value. If it is not available, then it will check first hired-student thread which have index of '0' since array's next element is '0'. So I have 2 more arrays those have indices according to best values of 'C'(ascending order) and 'S'(descending order). So when main thread gets a homework to deliver, it can check best student according to priority of the homework.
+\par{\parindent} Main thread checks if a hired-student is available or not by looking at available array. Each element of the array is '0' or '1'. If it is '1', that means hired-student, which have same index with element, is available at the moment. Lets say array is like that: [0,0,1], then that means third thread is available at the moment. It cannot send the homework first or second thread. Whenever main thread sends a homework to a hired-student, it just make the element '0' so it knows that thread is not available at the moment for next turns.
+\par{\parindent} When main thread finds best available student for the homework it will deliver, it just post the semiphore of the associated hired-student thread. So that thread can print a proper message and sleep according to it's speed. When that student awakes from sleeping, it just turns element of available array,associated with it's own index, into '1'. So main thread can deliver new homework to it again now. 
+\par{\parindent}Thread-g just reads the input-file-1 character by character and puts them in queue. Each time it receives a homework from file and puts into queue prints it's current total amount of money left. If it's money is not enough to have homeworks to be solved or there is no more homeworks in input-file-1, then it prints a proper message and terminates itself. 
+
+
+\newpage
+\section{OUTPUTS}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{./LatexImages/2.png}
+    \caption{Wrong argument example}
+    \label{fig:galaxy}
+\end{figure}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=13cm]{./LatexImages/3.png}
+    \caption{Example of no student info in file}
+    \label{fig:galaxy}
+\end{figure}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=13cm]{./LatexImages/4.png}
+    \caption{Proper run}
+    \label{fig:galaxy}
+\end{figure}
+
+\end{document}
+
+
+
+
